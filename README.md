@@ -1,3 +1,4 @@
+!!! This requires the newest version of LAMP mod !!!
 # Interactive Cockpit
 A Flyout LAMP mod script that allows for creation of clickable parts that bind to inputs.
 
