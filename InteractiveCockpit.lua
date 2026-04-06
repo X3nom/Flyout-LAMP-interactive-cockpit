@@ -10,8 +10,8 @@ Github: https://github.com/X3nom/Flyout-LAMP-interactive-cockpit
 local function dot(a, b)
     return a.x*b.x + a.y*b.y + a.z*b.z
 end
-
-
+-- math that is kinda already implemented in flyout and annotations.lua :(
+-- for now I'll keep it here as a reminder that I should sometimes actually read docs
 local function getRaySphereIntersectionDist(a, b, c, r)
     local d = b.copy - a.copy        -- direction vector
     local f = a - c        -- vector from center to line start
@@ -56,7 +56,7 @@ local function parseAndHandleSingleInteractive(str, is_trigger)
         minv = tonumber(stripFirst(minv)) or nil
         maxv = tonumber(stripFirst(maxv)) or nil
         
-        log("found: " .. typ .." ".. input_name .." ".. tostring(sens_or_val))
+        -- log("found: " .. typ .." ".. input_name .." ".. tostring(sens_or_val))
 
         if is_trigger and typ == "T" then
             local t = type(controls[input_name])
@@ -125,45 +125,13 @@ local function getAllInteractives()
 end
 
 local interactives = getAllInteractives()
-log(#interactives)
+log(tostring(#interactives) .. " interactive parts found")
 
-return function ()
-
-    if not controls.lmbPressed or not controls.lmbTriggered then
-        return -- no interaction computations needed - early exit
-    end
-    -- log("trigger")
-
-    -- we get 2 positions between camera and cursor at different distances
-    -- these positins are later used to define a ray (line)
-    local m1 = location.underMouse(0.01)
-    local m2 = location.underMouse(0.02)
-
-    local closest_intersect_dist = nil
-    local interacted_part = nil
-
-    for k, p in pairs(interactives) do
-        local global_pos = p.globalPos
-        -- radius of the clickable sphere is derived from x scale of the object
-        local interactive_radius = p.scale.x / 2.0
-
-        local intersection_dist = getRaySphereIntersectionDist(m1.xyz.copy, m2.xyz.copy, global_pos.copy, interactive_radius)
-
-        if intersection_dist ~= nil then
-            -- log("hit")
-            if closest_intersect_dist == nil or intersection_dist < closest_intersect_dist then
-                closest_intersect_dist = intersection_dist
-                interacted_part = p
-            end
+for k, p in pairs(interactives) do
+    p:onLeftClick(
+        function ()
+            parseAndHandleInteractives(p.name, true)
         end
-    end
-
-    if interacted_part == nil then
-        return -- no interacted part, exit
-    end
-    
-    local partname = interacted_part.name
-    log("hit: '" .. partname .. "'")
-    parseAndHandleInteractives(partname, controls.lmbTriggered)
-
+    )
 end
+
