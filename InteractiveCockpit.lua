@@ -2,61 +2,7 @@
 
 --[[
 =========== Interactive Cockpit by x3nom ===============
-What is this?
-- a LAMP mod script that allows for creation of clickable parts that bind to inputs
-
-=== GUIDE: ===
-1)
-Add this script to your aircraft folder (or the shared folder)
-2)
-Add part named "Lua: InteractiveCockpit.lua" (or whatever your correct path to this script is) to your aircraft
-The part can be anything (cube with scale 0 slapped onto Jimmy is more than enough)
-3)
-Add spheres to the places you want clickable elements to be (buttons, etc...)
-Scale the spheres to match size of the clickable area.
-The clickable area is actually a perfect sphere around the center of your sphere with radius derived from scale X
-4)
-Name the sphere according to the naming system*
-5)
-Set material to hole and enjoy
-
-==== NAMING SYSTEM ====
-The mod uses rules you define in the name of a part to decide what to do on click
-Every rule has to start with '\I' (as in <backslash>+<I>nput) and end with '\!'
-
-Folowing the 'I' in rule beginning, there has to be a "mode" specified in the form of one of following symbols: 'T', 'S', '+', '-'
-After that, another '\' follows, after which you should enter the name of your input. 
-After the input name, the rule can either be closed off using '\!' or continue with another backslash for additional parameters.
-
-== "modes" specification ==
-
-[T] - TOGGLE
-Toggles the input - for numeric inputs switches between 1 and 0, booleans betwen true / false
-Takes no additional parameters - has to be closed off right after the input name.
-Format: \IS\<name>\!
-
-example: `\IT\LandingGear\!` (will toggle landing gear up/down when clicked)
-
-
-[S] - SET
-Sets input to a value
-Takes 1 additional parameter - the value to set input to
-Format: \IS\<name>\<value>\!
-
-example: `\IS\my_input\0.4\!` (will set value 0.4 to input called my_input)
-
-
-[+] - PLUS STEP
-Adds a step value to the input. Can optionally be supplied with min and max parameters
-Format: \I+\<name>\<step>\!
-Format: \I+\<name>\<step>\<min?>\<max?>!
-
-
-[-] - MINUS STEP
-Subtracts a step value from the input. Can optionally be supplied with min and max parameters
-Format: \I-\<name>\<step>\!
-Format: \I-\<name>\<step>\<min?>\<max?>!
-
+Github: https://github.com/X3nom/Flyout-LAMP-interactive-cockpit
 ]]
 
 
@@ -98,20 +44,19 @@ local name_match_pattern =
 "\\I([T+%-PNS])\\([^\\]+)(\\[^\\]*)?(\\[^\\]*)?(\\[^\\]*)?\\!"
 --   mode     name     sensitivity  min         max
 
+-- used mainly for stripping leading backslash captured in optional pattern parameters
+local function stripFirst(str)
+    if str == nil then return nil end
+    return string.sub(str, 2)
+end
 
 local function parseAndHandleSingleInteractive(str, is_trigger)
     for typ, input_name, sens_or_val, minv, maxv in string.gmatch(str, name_match_pattern) do
-        local sens = nil
-        local val = nil
-        if type(sens_or_val) == "string" then
-            val = sens_or_val
-        else
-            sens = tonumber(sens) or 1
-        end
-        minv = tonumber(minv) or nil
-        maxv = tonumber(maxv) or nil
+        sens_or_val = stripFirst(sens_or_val)
+        minv = tonumber(stripFirst(minv)) or nil
+        maxv = tonumber(stripFirst(maxv)) or nil
         
-        log("found: " .. typ .." ".. input_name)
+        log("found: " .. typ .." ".. input_name .." ".. tostring(sens_or_val))
 
         if is_trigger and typ == "T" then
             local t = type(controls[input_name])
@@ -121,10 +66,14 @@ local function parseAndHandleSingleInteractive(str, is_trigger)
                 controls[input_name] = not controls[input_name]
             end
 
-        elseif is_trigger and typ == "S" and val ~= nil then
-            controls[input_name] = val
+        elseif is_trigger and typ == "S" and sens_or_val ~= nil then
+            local val = tonumber(sens_or_val) or sens_or_val
+            if val ~= nil then
+                controls[input_name] = val
+            end
         
         elseif is_trigger and (typ == "+" or typ == "-") then
+            local sens = tonumber(sens_or_val) or 1
             local newval = 0
             if(typ == "+") then
                 newval = controls[input_name] + sens
@@ -183,7 +132,7 @@ return function ()
     if not controls.lmbPressed or not controls.lmbTriggered then
         return -- no interaction computations needed - early exit
     end
-    log("trigger")
+    -- log("trigger")
 
     -- we get 2 positions between camera and cursor at different distances
     -- these positins are later used to define a ray (line)
@@ -201,7 +150,7 @@ return function ()
         local intersection_dist = getRaySphereIntersectionDist(m1.xyz.copy, m2.xyz.copy, global_pos.copy, interactive_radius)
 
         if intersection_dist ~= nil then
-            log("hit")
+            -- log("hit")
             if closest_intersect_dist == nil or intersection_dist < closest_intersect_dist then
                 closest_intersect_dist = intersection_dist
                 interacted_part = p
@@ -214,7 +163,7 @@ return function ()
     end
     
     local partname = interacted_part.name
-    log(partname)
+    log("hit: '" .. partname .. "'")
     parseAndHandleInteractives(partname, controls.lmbTriggered)
 
 end
