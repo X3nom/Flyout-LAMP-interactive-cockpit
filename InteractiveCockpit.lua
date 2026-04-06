@@ -1,7 +1,63 @@
 -- parts location ui
 
+--[[
+=========== Interactive Cockpit by x3nom ===============
+What is this?
+- a LAMP mod script that allows for creation of clickable parts that bind to inputs
+
+=== GUIDE: ===
+1)
+Add this script to your aircraft folder (or the shared folder)
+2)
+Add part named "Lua: InteractiveCockpit.lua" (or whatever your correct path to this script is) to your aircraft
+The part can be anything (cube with scale 0 slapped onto Jimmy is more than enough)
+3)
+Add spheres to the places you want clickable elements to be (buttons, etc...)
+Scale the spheres to match size of the clickable area.
+The clickable area is actually a perfect sphere around the center of your sphere with radius derived from scale X
+4)
+Name the sphere according to the naming system*
+5)
+Set material to hole and enjoy
+
+==== NAMING SYSTEM ====
+The mod uses rules you define in the name of a part to decide what to do on click
+Every rule has to start with '\I' (as in <backslash>+<I>nput) and end with '\!'
+
+Folowing the 'I' in rule beginning, there has to be a "mode" specified in the form of one of following symbols: 'T', 'S', '+', '-'
+After that, another '\' follows, after which you should enter the name of your input. 
+After the input name, the rule can either be closed off using '\!' or continue with another backslash for additional parameters.
+
+== "modes" specification ==
+
+[T] - TOGGLE
+Toggles the input - for numeric inputs switches between 1 and 0, booleans betwen true / false
+Takes no additional parameters - has to be closed off right after the input name.
+Format: \IS\<name>\!
+
+example: `\IT\LandingGear\!` (will toggle landing gear up/down when clicked)
 
 
+[S] - SET
+Sets input to a value
+Takes 1 additional parameter - the value to set input to
+Format: \IS\<name>\<value>\!
+
+example: `\IS\my_input\0.4\!` (will set value 0.4 to input called my_input)
+
+
+[+] - PLUS STEP
+Adds a step value to the input. Can optionally be supplied with min and max parameters
+Format: \I+\<name>\<step>\!
+Format: \I+\<name>\<step>\<min?>\<max?>!
+
+
+[-] - MINUS STEP
+Subtracts a step value from the input. Can optionally be supplied with min and max parameters
+Format: \I-\<name>\<step>\!
+Format: \I-\<name>\<step>\<min?>\<max?>!
+
+]]
 
 
 ---@return number
@@ -43,10 +99,7 @@ local name_match_pattern =
 --   mode     name     sensitivity  min         max
 
 
-
-local function parseAndHandleInteractives(str, is_trigger)
-    local result = {}
-
+local function parseAndHandleSingleInteractive(str, is_trigger)
     for typ, input_name, sens_or_val, minv, maxv in string.gmatch(str, name_match_pattern) do
         local sens = nil
         local val = nil
@@ -85,6 +138,19 @@ local function parseAndHandleInteractives(str, is_trigger)
     end
 end
 
+local function parseAndHandleInteractives(str, is_trigger)
+    local pos = 1
+    while true do
+        local ss, se = string.find(str, '\\I', pos)
+        local es, ee = string.find(str, '\\!', pos)
+        if ss == nil or ee == nil then break end
+
+        parseAndHandleSingleInteractive(string.sub(str, ss, ee), is_trigger)
+
+        pos = ee+1
+    end
+end
+
 
 
 local function validateInteractivesName(name)
@@ -93,8 +159,6 @@ local function validateInteractivesName(name)
     end
     return false
 end
-
-
 
 ---@return part[]
 local function getAllInteractives()
@@ -110,7 +174,6 @@ local function getAllInteractives()
 
     return found
 end
-
 
 local interactives = getAllInteractives()
 log(#interactives)
