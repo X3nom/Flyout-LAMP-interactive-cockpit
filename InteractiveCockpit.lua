@@ -39,6 +39,7 @@ local function getRaySphereIntersectionDist(a, b, c, r)
     return nil
 end
 
+
 local name_match_pattern =
 -- "\\I([T+%-PNS])\\([^\\]+)\\(\\[^\\]*)?\\(\\[^\\]*)?\\(\\[^\\]*)?\\!"
 "\\I([T+%-PNS])\\([^\\]+)(\\[^\\]*)?(\\[^\\]*)?(\\[^\\]*)?\\!"
@@ -93,6 +94,24 @@ local function parseAndHandleInteractives(str, is_trigger)
         local ss, se = string.find(str, '\\I', pos)
         local es, ee = string.find(str, '\\!', pos)
         if ss == nil or ee == nil then break end
+
+        parseAndHandleSingleInteractive(string.sub(str, ss, ee), is_trigger)
+
+        pos = ee+1
+    end
+end
+
+local function parseRule()
+
+end
+---@param str string
+local function parseName(str)
+    local pos = 1
+    while true do
+        local ss, se = string.find(str, '\\', pos)
+        local es, ee = string.find(str, '\\!', pos)
+        if ss == nil or ee == nil then break end
+        if ss ~= 1 and str[ss-1] ~= ' ' then c
 
         parseAndHandleSingleInteractive(string.sub(str, ss, ee), is_trigger)
 
