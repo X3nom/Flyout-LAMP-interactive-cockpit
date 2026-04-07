@@ -6,126 +6,122 @@ Github: https://github.com/X3nom/Flyout-LAMP-interactive-cockpit
 ]]
 
 
----@return number
-local function dot(a, b)
-    return a.x*b.x + a.y*b.y + a.z*b.z
+local L_DBG = 2 -- debug info
+local L_INF = 1 -- general info
+local L_ERR = 0 -- errors / severe warnings only
+------------------------
+local LOG_LEVEL = L_INF
+------------------------
+---@param level integer
+---@param msg   string
+local function llog(level, msg)
+    if LOG_LEVEL >= level then log(msg) end
 end
--- math that is kinda already implemented in flyout and annotations.lua :(
--- for now I'll keep it here as a reminder that I should sometimes actually read docs
-local function getRaySphereIntersectionDist(a, b, c, r)
-    local d = b.copy - a.copy        -- direction vector
-    local f = a - c        -- vector from center to line start
 
-    local A = dot(d, d)
-    local B = 2 * dot(f, d)
-    local C = dot(f, f) - r * r
 
-    local discriminant = B * B - 4 * A * C
 
-    if discriminant < 0 then
-        return nil -- no intersection
+---@param params any[]
+function ToggleHandler(params)
+    local id, input_name = table.unpack(params)
+    llog(L_DBG, "ToggleHandler")
+
+    local t = type(controls[input_name])
+    if t == "number" then
+        controls[input_name] = 1 - controls[input_name]
+    elseif t == "boolean" then
+        controls[input_name] = not controls[input_name]
     end
+end
 
-    discriminant = math.sqrt(discriminant)
+---@param params any[]
+function SetHandler(params)
+    local id, input_name, val = table.unpack(params)
 
-    local t1 = (0-B - discriminant) / (2 * A)
-    local t2 = (0-B + discriminant) / (2 * A)
-
-    -- on Ray
-    if t1 >= 0 or t2 >= 0 then
-        return math.min(t1, t2)
+    local val = tonumber(val) or val
+    if val ~= nil then
+        controls[input_name] = val
     end
+end
 
-    return nil
+---@param params any[]
+function StepHandler(params)
+    local id, input_name, sens, minv, maxv = table.unpack(params)
+
+    minv = tonumber(minv) or nil
+    maxv = tonumber(maxv) or nil
+    sens = tonumber(sens) or 1
+
+    local newval = 0
+    if(id == "+") then
+        newval = controls[input_name] + sens
+    else
+        newval = controls[input_name] - sens
+    end
+    if minv ~= nil then newval = math.max(newval, minv) end
+    if maxv ~= nil then newval = math.min(newval, maxv) end
+    controls[input_name] = newval
 end
 
 
-local name_match_pattern =
--- "\\I([T+%-PNS])\\([^\\]+)\\(\\[^\\]*)?\\(\\[^\\]*)?\\(\\[^\\]*)?\\!"
-"\\I([T+%-PNS])\\([^\\]+)(\\[^\\]*)?(\\[^\\]*)?(\\[^\\]*)?\\!"
---   mode     name     sensitivity  min         max
+-- Rule handler dispatch table
+local rule_handlers = {
+    ["T"] = ToggleHandler,
+    ["Toggle"] = ToggleHandler,
 
--- used mainly for stripping leading backslash captured in optional pattern parameters
-local function stripFirst(str)
-    if str == nil then return nil end
-    return string.sub(str, 2)
-end
+    ["S"] = SetHandler,
+    ["Set"] = SetHandler,
 
-local function parseAndHandleSingleInteractive(str, is_trigger)
-    for typ, input_name, sens_or_val, minv, maxv in string.gmatch(str, name_match_pattern) do
-        sens_or_val = stripFirst(sens_or_val)
-        minv = tonumber(stripFirst(minv)) or nil
-        maxv = tonumber(stripFirst(maxv)) or nil
-        
-        -- log("found: " .. typ .." ".. input_name .." ".. tostring(sens_or_val))
+    ["+"] = StepHandler,
+    ["-"] = StepHandler
+}
 
-        if is_trigger and typ == "T" then
-            local t = type(controls[input_name])
-            if t == "number" then
-                controls[input_name] = 1 - controls[input_name]
-            elseif t == "boolean" then
-                controls[input_name] = not controls[input_name]
-            end
 
-        elseif is_trigger and typ == "S" and sens_or_val ~= nil then
-            local val = tonumber(sens_or_val) or sens_or_val
-            if val ~= nil then
-                controls[input_name] = val
-            end
-        
-        elseif is_trigger and (typ == "+" or typ == "-") then
-            local sens = tonumber(sens_or_val) or 1
-            local newval = 0
-            if(typ == "+") then
-                newval = controls[input_name] + sens
-            else
-                newval = controls[input_name] - sens
-            end
-            if minv ~= nil then newval = math.max(newval, minv) end
-            if maxv ~= nil then newval = math.min(newval, maxv) end
-            controls[input_name] = newval
+--- string.split basically 
+---@param str string
+---@return string[]
+local function slashSeparatedToParams(str)
+    llog(L_DBG, "split: '"..tostring(str).."'")
+    local result = {}
+    for part in string.gmatch(str, "([^\\]*)\\?") do
+        if part == "" then
+            result[#result + 1] = nil -- skipped parameter (p1\\p3) -> set to nil to make handling look a bit nicer
+        else
+            result[#result + 1] = part
         end
     end
+    return result
 end
 
-local function parseAndHandleInteractives(str, is_trigger)
-    local pos = 1
-    while true do
-        local ss, se = string.find(str, '\\I', pos)
-        local es, ee = string.find(str, '\\!', pos)
-        if ss == nil or ee == nil then break end
-
-        parseAndHandleSingleInteractive(string.sub(str, ss, ee), is_trigger)
-
-        pos = ee+1
-    end
-end
-
-local function parseRule()
-
-end
 ---@param str string
 local function parseName(str)
     local pos = 1
     while true do
         local ss, se = string.find(str, '\\', pos)
         local es, ee = string.find(str, '\\!', pos)
-        if ss == nil or ee == nil then break end
-        if ss ~= 1 and str[ss-1] ~= ' ' then c
+        if ss == nil or se == nil or ee == nil then break end
+        if ss ~= 1 and str[ss-1] ~= ' ' then goto skip end
 
-        parseAndHandleSingleInteractive(string.sub(str, ss, ee), is_trigger)
+        -- split the rule into fields. (only the inner part is passed, slashSeparatedToParams never sees the start \ or the end tag \!)
+        local params = slashSeparatedToParams(str.sub(str, se+1, es-1))
 
+        local rule_id = params[1]
+        
+        llog(L_DBG, "dispatch rule id: " .. tostring(rule_id))
+        if rule_id ~= nil and rule_handlers[rule_id] ~= nil then
+            rule_handlers[rule_id](params)
+        end
+
+        ::skip::
         pos = ee+1
     end
 end
 
 
 
-local function validateInteractivesName(name)
-    for _ in string.gmatch(name, name_match_pattern) do
-        return true
-    end
-    return false
+local function hasInteractiveName(name)
+    local s, e = string.find(name, '\\!')
+    if s == nil or e == nil then return false end
+    return true
 end
 
 ---@return part[]
@@ -134,7 +130,7 @@ local function getAllInteractives()
 
     for _, part in ipairs(parts) do
         if part and part.name then
-            if validateInteractivesName(part.name) then
+            if hasInteractiveName(part.name) then
                 found[#found + 1] = part
             end
         end
@@ -144,12 +140,12 @@ local function getAllInteractives()
 end
 
 local interactives = getAllInteractives()
-log(tostring(#interactives) .. " interactive parts found")
+llog(L_INF, tostring(#interactives) .. " interactive parts found")
 
 for k, p in pairs(interactives) do
     p:onLeftClick(
         function ()
-            parseAndHandleInteractives(p.name, true)
+            parseName(p.name)
         end
     )
 end
