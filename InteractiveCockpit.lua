@@ -6,107 +6,193 @@ Github: https://github.com/X3nom/Flyout-LAMP-interactive-cockpit
 ]]
 
 
----@return number
-local function dot(a, b)
-    return a.x*b.x + a.y*b.y + a.z*b.z
+local L_DBG = 2 -- debug info
+local L_INF = 1 -- general info
+local L_ERR = 0 -- errors / severe warnings only
+------------------------
+local LOG_LEVEL = L_INF
+------------------------
+---@param level integer
+---@param msg   string
+local function llog(level, msg)
+    if LOG_LEVEL >= level then log(msg) end
 end
--- math that is kinda already implemented in flyout and annotations.lua :(
--- for now I'll keep it here as a reminder that I should sometimes actually read docs
-local function getRaySphereIntersectionDist(a, b, c, r)
-    local d = b.copy - a.copy        -- direction vector
-    local f = a - c        -- vector from center to line start
 
-    local A = dot(d, d)
-    local B = 2 * dot(f, d)
-    local C = dot(f, f) - r * r
 
-    local discriminant = B * B - 4 * A * C
+local OnUpdateCallbacks = {}
 
-    if discriminant < 0 then
-        return nil -- no intersection
+-- adds function to run every update. Returning true from the function will cause it to be removed and not run anymore
+function AddOnUpdateCallback(cb)
+    OnUpdateCallbacks[#OnUpdateCallbacks + 1] = cb
+end
+
+
+---@param params any[]
+function ToggleHandler(params)
+    local id, input_name = table.unpack(params, 1, params["n"])
+    llog(L_DBG, "ToggleHandler")
+
+    local t = type(controls[input_name])
+    if t == "number" then
+        controls[input_name] = 1 - controls[input_name]
+    elseif t == "boolean" then
+        controls[input_name] = not controls[input_name]
+    end
+end
+
+---@param params any[]
+function SetHandler(params)
+    local id, input_name, val = table.unpack(params, 1, params["n"])
+
+    local val = tonumber(val) or val
+    if val ~= nil then
+        controls[input_name] = val
+    end
+end
+
+---@param params any[]
+function StepHandler(params)
+    local id, input_name, sens, minv, maxv = table.unpack(params, 1, params["n"])
+
+    minv = tonumber(minv) or nil
+    maxv = tonumber(maxv) or nil
+    sens = tonumber(sens) or 1
+
+    local newval = 0
+    if(id == "+") then
+        newval = controls[input_name] + sens
+    else
+        newval = controls[input_name] - sens
+    end
+    if minv ~= nil then newval = math.max(newval, minv) end
+    if maxv ~= nil then newval = math.min(newval, maxv) end
+    controls[input_name] = newval
+end
+
+
+---@param params any[]
+function SliderHandler(params)
+    local id, input_name, sens, screen_step, minv, maxv = table.unpack(params, 1, params["n"])
+
+    minv = tonumber(minv) or nil
+    maxv = tonumber(maxv) or nil
+    screen_step = tonumber(screen_step) or nil
+    sens = tonumber(sens) or 1
+
+    local start_mouse_pos = controls.mousePos.copy
+
+    -- this is needed bc of wtf behavior on win 11 (for me at least)
+    local start_mouse_pos_y_corrected = start_mouse_pos.copy
+
+    controls.mousePos = start_mouse_pos_y_corrected
+    if controls.mousePos ~= start_mouse_pos_y_corrected then
+        start_mouse_pos_y_corrected.y = controls.mouseBounds_Y - start_mouse_pos.y
+        controls.mousePos = start_mouse_pos_y_corrected
+    end
+    -- end of the wtf thing
+
+    local delta_y_prev = 0
+    local step_unit = 0
+    if screen_step ~= nil then
+        step_unit = math.ceil(screen_step * controls.mouseBounds_Y / 100)
     end
 
-    discriminant = math.sqrt(discriminant)
+    local cb = function ()
+        if not controls.lmbPressed then
+            return true
+        end
 
-    local t1 = (0-B - discriminant) / (2 * A)
-    local t2 = (0-B + discriminant) / (2 * A)
+        local delta_y_px = start_mouse_pos.y - controls.mousePos_Y
+        controls.mousePos = start_mouse_pos_y_corrected
+        -- delta_y normalized based on screen height
+        local delta_y = delta_y_px / controls.mouseBounds_Y
 
-    -- on Ray
-    if t1 >= 0 or t2 >= 0 then
-        return math.min(t1, t2)
+        local newval = 0
+        if screen_step == nil or screen_step == 0 then
+            newval = controls[input_name] + delta_y * sens
+        else
+            delta_y_prev = delta_y_prev + delta_y_px
+            local step_count = math.floor(delta_y_prev / step_unit)
+            delta_y_prev = delta_y_prev % step_unit
+
+            newval = controls[input_name] + step_count * sens
+        end
+
+        if minv ~= nil then newval = math.max(newval, minv) end
+        if maxv ~= nil then newval = math.min(newval, maxv) end
+
+        controls[input_name] = newval
+        
     end
 
-    return nil
+    AddOnUpdateCallback(cb)
+
 end
 
-local name_match_pattern =
--- "\\I([T+%-PNS])\\([^\\]+)\\(\\[^\\]*)?\\(\\[^\\]*)?\\(\\[^\\]*)?\\!"
-"\\I([T+%-PNS])\\([^\\]+)(\\[^\\]*)?(\\[^\\]*)?(\\[^\\]*)?\\!"
---   mode     name     sensitivity  min         max
 
--- used mainly for stripping leading backslash captured in optional pattern parameters
-local function stripFirst(str)
-    if str == nil then return nil end
-    return string.sub(str, 2)
-end
+-- Rule handler dispatch table
+local rule_handlers = {
+    ["T"] = ToggleHandler,
+    ["Toggle"] = ToggleHandler,
 
-local function parseAndHandleSingleInteractive(str, is_trigger)
-    for typ, input_name, sens_or_val, minv, maxv in string.gmatch(str, name_match_pattern) do
-        sens_or_val = stripFirst(sens_or_val)
-        minv = tonumber(stripFirst(minv)) or nil
-        maxv = tonumber(stripFirst(maxv)) or nil
-        
-        -- log("found: " .. typ .." ".. input_name .." ".. tostring(sens_or_val))
+    ["="] = SetHandler,
+    ["Set"] = SetHandler,
 
-        if is_trigger and typ == "T" then
-            local t = type(controls[input_name])
-            if t == "number" then
-                controls[input_name] = 1 - controls[input_name]
-            elseif t == "boolean" then
-                controls[input_name] = not controls[input_name]
-            end
+    ["+"] = StepHandler,
+    ["-"] = StepHandler,
 
-        elseif is_trigger and typ == "S" and sens_or_val ~= nil then
-            local val = tonumber(sens_or_val) or sens_or_val
-            if val ~= nil then
-                controls[input_name] = val
-            end
-        
-        elseif is_trigger and (typ == "+" or typ == "-") then
-            local sens = tonumber(sens_or_val) or 1
-            local newval = 0
-            if(typ == "+") then
-                newval = controls[input_name] + sens
-            else
-                newval = controls[input_name] - sens
-            end
-            if minv ~= nil then newval = math.max(newval, minv) end
-            if maxv ~= nil then newval = math.min(newval, maxv) end
-            controls[input_name] = newval
+    ["S"] = SliderHandler,
+    ["Slider"] = SliderHandler
+}
+
+
+--- string.split basically 
+---@param str string
+---@return string[]
+local function slashSeparatedToParams(str)
+    llog(L_DBG, "split: '"..tostring(str).."'")
+    local result = { n = 0 }
+    for part in string.gmatch(str, "([^\\]*)\\?") do
+        result.n = result.n + 1
+        if part == "" then
+            result[result.n] = nil -- skipped parameter (p1\\p3) -> set to nil to make handling look a bit nicer
+        else
+            result[result.n] = part
         end
     end
+    return result
 end
 
-local function parseAndHandleInteractives(str, is_trigger)
+---@param str string
+local function parseName(str)
     local pos = 1
     while true do
-        local ss, se = string.find(str, '\\I', pos)
+        local ss, se = string.find(str, '\\', pos)
         local es, ee = string.find(str, '\\!', pos)
-        if ss == nil or ee == nil then break end
+        if ss == nil or se == nil or ee == nil then break end
+        if ss ~= 1 and str[ss-1] ~= ' ' then goto skip end
 
-        parseAndHandleSingleInteractive(string.sub(str, ss, ee), is_trigger)
+        -- split the rule into fields. (only the inner part is passed, slashSeparatedToParams never sees the start \ or the end tag \!)
+        local params = slashSeparatedToParams(str.sub(str, se+1, es-1))
 
+        local rule_id = params[1]
+        
+        llog(L_DBG, "dispatch rule id: " .. tostring(rule_id))
+        if rule_id ~= nil and rule_handlers[rule_id] ~= nil then
+            rule_handlers[rule_id](params)
+        end
+
+        ::skip::
         pos = ee+1
     end
 end
 
 
 
-local function validateInteractivesName(name)
-    for _ in string.gmatch(name, name_match_pattern) do
-        return true
-    end
-    return false
+local function hasInteractiveName(name)
+    local s, e = string.find(name, '\\!')
+    if s == nil or e == nil then return false end
+    return true
 end
 
 ---@return part[]
@@ -115,7 +201,7 @@ local function getAllInteractives()
 
     for _, part in ipairs(parts) do
         if part and part.name then
-            if validateInteractivesName(part.name) then
+            if hasInteractiveName(part.name) then
                 found[#found + 1] = part
             end
         end
@@ -125,13 +211,20 @@ local function getAllInteractives()
 end
 
 local interactives = getAllInteractives()
-log(tostring(#interactives) .. " interactive parts found")
+llog(L_INF, tostring(#interactives) .. " interactive parts found")
 
 for k, p in pairs(interactives) do
     p:onLeftClick(
         function ()
-            parseAndHandleInteractives(p.name, true)
+            parseName(p.name)
         end
     )
 end
 
+return function()
+    for i = #OnUpdateCallbacks, 1, -1 do
+        if OnUpdateCallbacks[i]() == true then
+            table.remove(OnUpdateCallbacks, i)
+        end
+    end
+end
