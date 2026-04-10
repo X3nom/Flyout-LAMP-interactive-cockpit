@@ -19,10 +19,17 @@ local function llog(level, msg)
 end
 
 
+local OnUpdateCallbacks = {}
+
+-- adds function to run every update. Returning true from the function will cause it to be removed and not run anymore
+function AddOnUpdateCallback(cb)
+    OnUpdateCallbacks[#OnUpdateCallbacks + 1] = cb
+end
+
 
 ---@param params any[]
 function ToggleHandler(params)
-    local id, input_name = table.unpack(params)
+    local id, input_name = table.unpack(params, 1, params["n"])
     llog(L_DBG, "ToggleHandler")
 
     local t = type(controls[input_name])
@@ -35,7 +42,7 @@ end
 
 ---@param params any[]
 function SetHandler(params)
-    local id, input_name, val = table.unpack(params)
+    local id, input_name, val = table.unpack(params, 1, params["n"])
 
     local val = tonumber(val) or val
     if val ~= nil then
@@ -45,7 +52,7 @@ end
 
 ---@param params any[]
 function StepHandler(params)
-    local id, input_name, sens, minv, maxv = table.unpack(params)
+    local id, input_name, sens, minv, maxv = table.unpack(params, 1, params["n"])
 
     minv = tonumber(minv) or nil
     maxv = tonumber(maxv) or nil
@@ -63,16 +70,79 @@ function StepHandler(params)
 end
 
 
+---@param params any[]
+function SliderHandler(params)
+    local id, input_name, sens, screen_step, minv, maxv = table.unpack(params, 1, params["n"])
+
+    minv = tonumber(minv) or nil
+    maxv = tonumber(maxv) or nil
+    screen_step = tonumber(screen_step) or nil
+    sens = tonumber(sens) or 1
+
+    local start_mouse_pos = controls.mousePos.copy
+
+    -- this is needed bc of wtf behavior on win 11 (for me at least)
+    local start_mouse_pos_y_corrected = start_mouse_pos.copy
+
+    controls.mousePos = start_mouse_pos_y_corrected
+    if controls.mousePos ~= start_mouse_pos_y_corrected then
+        start_mouse_pos_y_corrected.y = controls.mouseBounds_Y - start_mouse_pos.y
+        controls.mousePos = start_mouse_pos_y_corrected
+    end
+    -- end of the wtf thing
+
+    local delta_y_prev = 0
+    local step_unit = 0
+    if screen_step ~= nil then
+        step_unit = math.ceil(screen_step * controls.mouseBounds_Y / 100)
+    end
+
+    local cb = function ()
+        if not controls.lmbPressed then
+            return true
+        end
+
+        local delta_y_px = start_mouse_pos.y - controls.mousePos_Y
+        controls.mousePos = start_mouse_pos_y_corrected
+        -- delta_y normalized based on screen height
+        local delta_y = delta_y_px / controls.mouseBounds_Y
+
+        local newval = 0
+        if screen_step == nil or screen_step == 0 then
+            newval = controls[input_name] + delta_y * sens
+        else
+            delta_y_prev = delta_y_prev + delta_y_px
+            local step_count = math.floor(delta_y_prev / step_unit)
+            delta_y_prev = delta_y_prev % step_unit
+
+            newval = controls[input_name] + step_count * sens
+        end
+
+        if minv ~= nil then newval = math.max(newval, minv) end
+        if maxv ~= nil then newval = math.min(newval, maxv) end
+
+        controls[input_name] = newval
+        
+    end
+
+    AddOnUpdateCallback(cb)
+
+end
+
+
 -- Rule handler dispatch table
 local rule_handlers = {
     ["T"] = ToggleHandler,
     ["Toggle"] = ToggleHandler,
 
-    ["S"] = SetHandler,
+    ["="] = SetHandler,
     ["Set"] = SetHandler,
 
     ["+"] = StepHandler,
-    ["-"] = StepHandler
+    ["-"] = StepHandler,
+
+    ["S"] = SliderHandler,
+    ["Slider"] = SliderHandler
 }
 
 
@@ -81,12 +151,13 @@ local rule_handlers = {
 ---@return string[]
 local function slashSeparatedToParams(str)
     llog(L_DBG, "split: '"..tostring(str).."'")
-    local result = {}
+    local result = { n = 0 }
     for part in string.gmatch(str, "([^\\]*)\\?") do
+        result.n = result.n + 1
         if part == "" then
-            result[#result + 1] = nil -- skipped parameter (p1\\p3) -> set to nil to make handling look a bit nicer
+            result[result.n] = nil -- skipped parameter (p1\\p3) -> set to nil to make handling look a bit nicer
         else
-            result[#result + 1] = part
+            result[result.n] = part
         end
     end
     return result
@@ -150,3 +221,10 @@ for k, p in pairs(interactives) do
     )
 end
 
+return function()
+    for i = #OnUpdateCallbacks, 1, -1 do
+        if OnUpdateCallbacks[i]() == true then
+            table.remove(OnUpdateCallbacks, i)
+        end
+    end
+end
