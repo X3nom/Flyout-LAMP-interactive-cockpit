@@ -188,20 +188,31 @@ local function parseName(str)
 end
 
 
-
-local function hasInteractiveName(name)
-    local s, e = string.find(name, '\\!')
-    if s == nil or e == nil then return false end
-    return true
+local function hasValidRuleId(str)
+    local pos = 1
+    while true do
+        local ss, se = string.find(str, '\\', pos)
+        local es, ee = string.find(str, '\\!', pos)
+        if ss == nil or se == nil or ee == nil then break end
+        if ss ~= 1 and str[ss-1] ~= ' ' then goto skip end
+        local params = slashSeparatedToParams(str.sub(str, se+1, es-1))
+        local rule_id = params[1]
+        if rule_handlers[rule_id] ~= nil then
+            return true
+        end
+        ::skip::
+        pos = ee+1
+    end
+    return false
 end
 
 ---@return part[]
-local function getAllInteractives()
+local function getAllRuleParts()
     local found = {}
 
     for _, part in ipairs(parts) do
         if part and part.name then
-            if hasInteractiveName(part.name) then
+            if hasValidRuleId(part.name) then
                 found[#found + 1] = part
             end
         end
@@ -210,7 +221,7 @@ local function getAllInteractives()
     return found
 end
 
-local interactives = getAllInteractives()
+local interactives = getAllRuleParts()
 llog(L_INF, tostring(#interactives) .. " interactive parts found")
 
 for k, p in pairs(interactives) do
