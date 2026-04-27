@@ -1,0 +1,2732 @@
+Part
+{
+ resource_path=Parts/Shapes/Cube
+ title=\14SegmentDisplay\Mach\!
+ id=0
+ parent_id=-1
+ position=0.0000,0.0000,0.0000
+ rotation=0.000000,0.000000,0.000000,1.000000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0067,0.0100,0.0003
+ }
+ *FuelTank
+ {
+  title=Cube
+  system=0
+  priority=1
+  fuel=0
+  fill=0.0000
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.099, 0.099, 0.099, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=0
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=f
+ id=1
+ parent_id=0
+ position=-0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=b
+ id=2
+ parent_id=0
+ position=0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=e
+ id=3
+ parent_id=0
+ position=-0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=c
+ id=4
+ parent_id=0
+ position=0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g1
+ id=5
+ parent_id=0
+ position=-0.0011,0.0000,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g2
+ id=6
+ parent_id=0
+ position=0.0011,0.0000,0.0000
+ rotation=0.500000,0.500000,-0.500000,-0.500000
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=10
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=i
+ id=7
+ parent_id=0
+ position=0.0001,0.0024,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=l
+ id=8
+ parent_id=0
+ position=0.0001,-0.0024,0.0000
+ rotation=0.707106,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=a
+ id=9
+ parent_id=0
+ position=-0.0001,0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=d
+ id=10
+ parent_id=0
+ position=0.0001,-0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=k
+ id=11
+ parent_id=0
+ position=-0.0011,-0.0021,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=m
+ id=12
+ parent_id=0
+ position=0.0011,-0.0021,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=j
+ id=13
+ parent_id=0
+ position=0.0011,0.0020,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=h
+ id=14
+ parent_id=0
+ position=-0.0011,0.0020,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=dp
+ id=15
+ parent_id=0
+ position=0.0030,-0.0045,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0022
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/Shapes/Cube
+ title=14SegmentChar
+ id=16
+ parent_id=0
+ position=0.0066,0.0000,0.0000
+ rotation=0.000000,0.000000,0.000000,1.000000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0067,0.0100,0.0003
+ }
+ *FuelTank
+ {
+  title=Cube
+  system=0
+  priority=1
+  fuel=0
+  fill=0.0000
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.099, 0.099, 0.099, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=0
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=f
+ id=17
+ parent_id=16
+ position=-0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=b
+ id=18
+ parent_id=16
+ position=0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=e
+ id=19
+ parent_id=16
+ position=-0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=c
+ id=20
+ parent_id=16
+ position=0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g1
+ id=21
+ parent_id=16
+ position=-0.0011,0.0000,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g2
+ id=22
+ parent_id=16
+ position=0.0011,0.0000,0.0000
+ rotation=0.500000,0.500000,-0.500000,-0.500000
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=10
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=i
+ id=23
+ parent_id=16
+ position=0.0001,0.0024,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=l
+ id=24
+ parent_id=16
+ position=0.0001,-0.0024,0.0000
+ rotation=0.707106,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=a
+ id=25
+ parent_id=16
+ position=-0.0001,0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=d
+ id=26
+ parent_id=16
+ position=0.0001,-0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=k
+ id=27
+ parent_id=16
+ position=-0.0011,-0.0021,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=m
+ id=28
+ parent_id=16
+ position=0.0011,-0.0021,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=j
+ id=29
+ parent_id=16
+ position=0.0011,0.0020,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=h
+ id=30
+ parent_id=16
+ position=-0.0011,0.0020,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=dp
+ id=31
+ parent_id=16
+ position=0.0030,-0.0045,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0022
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/Shapes/Cube
+ title=14SegmentChar
+ id=32
+ parent_id=16
+ position=0.0067,0.0000,0.0000
+ rotation=0.000000,0.000000,0.000000,1.000000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0067,0.0100,0.0003
+ }
+ *FuelTank
+ {
+  title=Cube
+  system=0
+  priority=1
+  fuel=0
+  fill=0.0000
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.099, 0.099, 0.099, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=0
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=f
+ id=33
+ parent_id=32
+ position=-0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=b
+ id=34
+ parent_id=32
+ position=0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=e
+ id=35
+ parent_id=32
+ position=-0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=c
+ id=36
+ parent_id=32
+ position=0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g1
+ id=37
+ parent_id=32
+ position=-0.0011,0.0000,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g2
+ id=38
+ parent_id=32
+ position=0.0011,0.0000,0.0000
+ rotation=0.500000,0.500000,-0.500000,-0.500000
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=10
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=i
+ id=39
+ parent_id=32
+ position=0.0001,0.0024,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=l
+ id=40
+ parent_id=32
+ position=0.0001,-0.0024,0.0000
+ rotation=0.707106,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=a
+ id=41
+ parent_id=32
+ position=-0.0001,0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=d
+ id=42
+ parent_id=32
+ position=0.0001,-0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=k
+ id=43
+ parent_id=32
+ position=-0.0011,-0.0021,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=m
+ id=44
+ parent_id=32
+ position=0.0011,-0.0021,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=j
+ id=45
+ parent_id=32
+ position=0.0011,0.0020,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=h
+ id=46
+ parent_id=32
+ position=-0.0011,0.0020,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=dp
+ id=47
+ parent_id=32
+ position=0.0030,-0.0045,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0022
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/Shapes/Cube
+ title=14SegmentChar
+ id=48
+ parent_id=32
+ position=0.0066,0.0000,0.0000
+ rotation=0.000000,0.000000,0.000000,1.000000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0067,0.0100,0.0003
+ }
+ *FuelTank
+ {
+  title=Cube
+  system=0
+  priority=1
+  fuel=0
+  fill=0.0000
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.099, 0.099, 0.099, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=0
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=f
+ id=49
+ parent_id=48
+ position=-0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=b
+ id=50
+ parent_id=48
+ position=0.0022,0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=e
+ id=51
+ parent_id=48
+ position=-0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=c
+ id=52
+ parent_id=48
+ position=0.0022,-0.0023,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g1
+ id=53
+ parent_id=48
+ position=-0.0011,0.0000,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=g2
+ id=54
+ parent_id=48
+ position=0.0011,0.0000,0.0000
+ rotation=0.500000,0.500000,-0.500000,-0.500000
+ mirrored=False
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0034
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=10
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=i
+ id=55
+ parent_id=48
+ position=0.0001,0.0024,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=l
+ id=56
+ parent_id=48
+ position=0.0001,-0.0024,0.0000
+ rotation=0.707106,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=a
+ id=57
+ parent_id=48
+ position=-0.0001,0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=d
+ id=58
+ parent_id=48
+ position=0.0001,-0.0041,0.0000
+ rotation=0.500000,-0.500000,0.500000,-0.500000
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=k
+ id=59
+ parent_id=48
+ position=-0.0011,-0.0021,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=m
+ id=60
+ parent_id=48
+ position=0.0011,-0.0021,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=j
+ id=61
+ parent_id=48
+ position=0.0011,0.0020,0.0000
+ rotation=0.690345,-0.153046,0.153046,-0.690346
+ mirrored=True
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=h
+ id=62
+ parent_id=48
+ position=-0.0011,0.0020,0.0000
+ rotation=-0.690345,-0.153046,0.153046,0.690346
+ mirrored=False
+ *Resizable
+ {
+  size=0.0013,0.0100,0.0068
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
+Part
+{
+ resource_path=Parts/LightStrip
+ title=dp
+ id=63
+ parent_id=48
+ position=0.0030,-0.0045,0.0000
+ rotation=0.707107,0.000000,0.000000,-0.707107
+ mirrored=True
+ *Resizable
+ {
+  size=0.0020,0.0100,0.0022
+ }
+ *NavLight
+ {
+  color=RGBA(1.000, 1.000, 1.000, 1.000)
+  interval=0
+  power=150
+ }
+ *InputProcessor
+ {
+  index=0
+  speed=60
+  range=0,1
+  default=0
+ }
+  *PartMaterials
+  {
+   index=0
+   mat=Default
+ Material
+ {
+  material=Default
+  color=RGBA(0.698, 0.698, 0.698, 1.000)
+  smoothness=0.15
+  metallic=1.00
+  tiling=2,2
+  offset=0,0
+  detail_strength=1
+ }
+  }
+}
+|---------------------------------------------------------------------|
