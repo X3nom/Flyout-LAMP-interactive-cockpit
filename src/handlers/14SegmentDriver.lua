@@ -1,46 +1,11 @@
 -- parts
 
--- derived from the InteractiveCockpit.lua, not included there because of huge size of the display driver
+require("core")
+require("misc")
 
-local L_DBG = 2 -- debug info
-local L_INF = 1 -- general info
-local L_ERR = 0 -- errors / severe warnings only
-------------------------
-local LOG_LEVEL = L_INF
-------------------------
----@param level integer
----@param msg   string
-local function llog(level, msg)
-    if LOG_LEVEL >= level then log(msg) end
-end
-
-local OnUpdateCallbacks = {}
 
 local anti_clip_offset = 0.001
 
--- adds function to run every update. Returning true from the function will cause it to be removed and not run anymore
-function AddOnUpdateCallback(cb)
-    OnUpdateCallbacks[#OnUpdateCallbacks + 1] = cb
-end
-
----@param parts part[]
----@param name string
-local function getPartByName(parts, name)
-    for _, p in pairs(parts) do
-        -- log(p.name)
-        if p.name == name then return p end
-    end
-    return nil
-end
-
-function split(str, sep)
-    local result = {}
-    local pattern = '([^' .. sep .. ']+)'
-    for match in str:gmatch(pattern) do
-        result[#result + 1] = match
-    end
-    return result
-end
 
 -- let's hope that claude knows his shit about 14 segment display characters :D
 local charset_14_seg = {
@@ -203,7 +168,7 @@ local function displayHandler(params, part)
     local curr_part = part
     while curr_part ~= nil do
         characters[#characters+1] = curr_part
-        curr_part = getPartByName(curr_part.children, "14SegmentChar")
+        curr_part = GetPartByName(curr_part.children, "14SegmentChar")
     end
 
     local input_exists = controls[input_name] ~= nil
@@ -225,97 +190,5 @@ local function displayHandler(params, part)
 end
 
 
--- Rule handler dispatch table
-local rule_handlers = {
-    ["14SegmentDisplay"] = displayHandler
-}
 
---- string.split basically 
----@param str string
----@return string[]
-local function slashSeparatedToParams(str)
-    llog(L_DBG, "split: '"..tostring(str).."'")
-    local result = { n = 0 }
-    for part in string.gmatch(str, "([^\\]*)\\?") do
-        result.n = result.n + 1
-        if part == "" then
-            result[result.n] = nil -- skipped parameter (p1\\p3) -> set to nil to make handling look a bit nicer
-        else
-            result[result.n] = part
-        end
-    end
-    return result
-end
-
----@param str string
-local function parseName(str, p)
-    local pos = 1
-    while true do
-        local ss, se = string.find(str, '\\', pos)
-        local es, ee = string.find(str, '\\!', pos)
-        if ss == nil or se == nil or ee == nil then break end
-        if ss ~= 1 and str[ss-1] ~= ' ' then goto skip end
-
-        -- split the rule into fields. (only the inner part is passed, slashSeparatedToParams never sees the start \ or the end tag \!)
-        local params = slashSeparatedToParams(str.sub(str, se+1, es-1))
-
-        local rule_id = params[1]
-        
-        llog(L_DBG, "dispatch rule id: " .. tostring(rule_id))
-        if rule_id ~= nil and rule_handlers[rule_id] ~= nil then
-            rule_handlers[rule_id](params, p)
-        end
-
-        ::skip::
-        pos = ee+1
-    end
-end
-
-
-local function hasValidRuleId(str)
-    local pos = 1
-    while true do
-        local ss, se = string.find(str, '\\', pos)
-        local es, ee = string.find(str, '\\!', pos)
-        if ss == nil or se == nil or ee == nil then break end
-        if ss ~= 1 and str[ss-1] ~= ' ' then goto skip end
-        local params = slashSeparatedToParams(str.sub(str, se+1, es-1))
-        local rule_id = params[1]
-        if rule_handlers[rule_id] ~= nil then
-            return true
-        end
-        ::skip::
-        pos = ee+1
-    end
-    return false
-end
-
----@return part[]
-local function getAllRuleParts()
-    local found = {}
-
-    for _, part in pairs(parts) do
-        if part and part.name then
-            if hasValidRuleId(part.name) then
-                found[#found + 1] = part
-            end
-        end
-    end
-
-    return found
-end
-
-local interactives = getAllRuleParts()
-llog(L_INF, tostring(#interactives) .. " display parts found")
-
-for k, p in pairs(interactives) do
-    parseName(p.name, p)
-end
-
-
-
-return function()
-    for i = #OnUpdateCallbacks, 1, -1 do
-        OnUpdateCallbacks[i]()
-    end
-end
+RegisterOnTickRuleHandler("14SegmentDisplay", displayHandler)
