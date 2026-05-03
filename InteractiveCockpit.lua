@@ -3,6 +3,8 @@
 --[[
 =========== Interactive Cockpit by x3nom ===============
 Github: https://github.com/X3nom/Flyout-LAMP-interactive-cockpit
+
+Version: 0.1.1
 ]]
 
 
@@ -81,16 +83,6 @@ function SliderHandler(params)
 
     local start_mouse_pos = controls.mousePos.copy
 
-    -- this is needed bc of wtf behavior on win 11 (for me at least)
-    local start_mouse_pos_y_corrected = start_mouse_pos.copy
-
-    controls.mousePos = start_mouse_pos_y_corrected
-    if controls.mousePos ~= start_mouse_pos_y_corrected then
-        start_mouse_pos_y_corrected.y = controls.mouseBounds_Y - start_mouse_pos.y
-        controls.mousePos = start_mouse_pos_y_corrected
-    end
-    -- end of the wtf thing
-
     local delta_y_prev = 0
     local step_unit = 0
     if screen_step ~= nil then
@@ -103,7 +95,7 @@ function SliderHandler(params)
         end
 
         local delta_y_px = start_mouse_pos.y - controls.mousePos_Y
-        controls.mousePos = start_mouse_pos_y_corrected
+        controls.mousePos = start_mouse_pos
         -- delta_y normalized based on screen height
         local delta_y = delta_y_px / controls.mouseBounds_Y
 
@@ -188,20 +180,31 @@ local function parseName(str)
 end
 
 
-
-local function hasInteractiveName(name)
-    local s, e = string.find(name, '\\!')
-    if s == nil or e == nil then return false end
-    return true
+local function hasValidRuleId(str)
+    local pos = 1
+    while true do
+        local ss, se = string.find(str, '\\', pos)
+        local es, ee = string.find(str, '\\!', pos)
+        if ss == nil or se == nil or ee == nil then break end
+        if ss ~= 1 and str[ss-1] ~= ' ' then goto skip end
+        local params = slashSeparatedToParams(str.sub(str, se+1, es-1))
+        local rule_id = params[1]
+        if rule_handlers[rule_id] ~= nil then
+            return true
+        end
+        ::skip::
+        pos = ee+1
+    end
+    return false
 end
 
 ---@return part[]
-local function getAllInteractives()
+local function getAllRuleParts()
     local found = {}
 
     for _, part in ipairs(parts) do
         if part and part.name then
-            if hasInteractiveName(part.name) then
+            if hasValidRuleId(part.name) then
                 found[#found + 1] = part
             end
         end
@@ -210,7 +213,7 @@ local function getAllInteractives()
     return found
 end
 
-local interactives = getAllInteractives()
+local interactives = getAllRuleParts()
 llog(L_INF, tostring(#interactives) .. " interactive parts found")
 
 for k, p in pairs(interactives) do
