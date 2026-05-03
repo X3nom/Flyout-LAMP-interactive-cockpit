@@ -3,6 +3,8 @@
 --[[
 =========== Interactive Cockpit by x3nom ===============
 Github: https://github.com/X3nom/Flyout-LAMP-interactive-cockpit
+
+Version: 0.1.1
 ]]
 
 
@@ -81,16 +83,6 @@ function SliderHandler(params)
 
     local start_mouse_pos = controls.mousePos.copy
 
-    -- this is needed bc of wtf behavior on win 11 (for me at least)
-    local start_mouse_pos_y_corrected = start_mouse_pos.copy
-
-    controls.mousePos = start_mouse_pos_y_corrected
-    if controls.mousePos ~= start_mouse_pos_y_corrected then
-        start_mouse_pos_y_corrected.y = controls.mouseBounds_Y - start_mouse_pos.y
-        controls.mousePos = start_mouse_pos_y_corrected
-    end
-    -- end of the wtf thing
-
     local delta_y_prev = 0
     local step_unit = 0
     if screen_step ~= nil then
@@ -103,7 +95,7 @@ function SliderHandler(params)
         end
 
         local delta_y_px = start_mouse_pos.y - controls.mousePos_Y
-        controls.mousePos = start_mouse_pos_y_corrected
+        controls.mousePos = start_mouse_pos
         -- delta_y normalized based on screen height
         local delta_y = delta_y_px / controls.mouseBounds_Y
 
